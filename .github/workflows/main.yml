@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         python-version: 3.7
-	steps:
+    steps:
     - name: checkout
       uses: actions/checkout@v1
     - name: Configure AWS Credentials
