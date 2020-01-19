@@ -77,3 +77,5 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
+	pythonBin: /opt/python3.7/bin/python
+
