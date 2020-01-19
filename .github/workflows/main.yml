@@ -3,7 +3,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    strategy:
+      matrix:
+        python-version: 3.7
+	steps:
     - name: checkout
       uses: actions/checkout@v1
     - name: Configure AWS Credentials
