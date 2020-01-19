@@ -3,9 +3,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -19,7 +16,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.8
-    - name: Install dependencies
+    - name: Use Python 
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+	- name: Install dependencies
       run: npm install -g serverless && npm install --save serverless-python-requirements
     - name: Deploy to Python lambda
       run: serverless deploy
