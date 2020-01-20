@@ -6,7 +6,7 @@ from pymongo import MongoClient
 def main(event, context):
     username = os.environ['DB_CREDENTIAL_USERNAME']
     password = os.environ['DB_CREDENTIAL_PASSWORD']
-    url = "mongodb+srv://" + username + ":" + password + ">@cluster0-gpeio.mongodb.net/test?retryWrites=true&w=majority";
+    url = "mongodb+srv://" + username + ":" + password + ">@cluster0-gpeio.mongodb.net/RPG?retryWrites=true&w=majority";
     client = MongoClient(url);
     db = client.RPG;
     results = db.list_entries.find_one({type: 'text'})
