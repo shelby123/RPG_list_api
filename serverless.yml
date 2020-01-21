@@ -18,6 +18,14 @@ iamRoleStatements:
 functions:
   CRUD:
     handler: handler.main
+  
+  get: 
+    handler: lists/get.get
+    events:
+      - http:
+          path: lists/{id}
+          method: get
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

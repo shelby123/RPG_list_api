@@ -2,17 +2,17 @@ import json
 import os
 from pymongo import MongoClient
 
-def main(event, context):
+# TODO: refactor DB connection into separate file. 
+def get(event, context):
     username = os.environ['DB_CREDENTIAL_USERNAME']
     password = os.environ['DB_CREDENTIAL_PASSWORD']
     url = "mongodb+srv://" + username + ":" + password + "@cluster0-gpeio.mongodb.net/test?retryWrites=true&w=majority";
     client = MongoClient(url);
     db = client.RPG;
-    results = db.list_entries.find_one({})
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event, 
-        "dbResult": results
+        "idRead": event['pathParameters']['id']
     }
 
     response = {
