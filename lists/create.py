@@ -19,19 +19,19 @@ def create(event, context):
     db = client.RPG;
 
     listObject = {
-        "createdAt": time.time,
-        "lastModified": time.time,
+        "createdAt": int(time.time()),
+        "lastModified": int(time.time()),
         "name": event['name'],
         "user": event['user'],
         "entries": []
     }
-    print("Object to add to the DB is " + str(listObject));
-    collection = client.list_entries
+    print("Object to add to the DB is " + str(listObject))
+    collection = db.list_entries
     result = collection.insert_one(listObject)
     resultId = result.inserted_id
-    print("result id is " + resultId.str);
+    print("result id is " + str(resultId))
     body = {
-        "id": resultId
+        "id": str(resultId)
     }
 
     response = {
