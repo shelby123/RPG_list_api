@@ -23,7 +23,7 @@ functions:
     handler: lists/get.get
     events:
       - http:
-          path: lists/{id}
+          path: lists/get
           method: get
           cors: true
   create: 
