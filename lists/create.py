@@ -25,7 +25,7 @@ def create(event, context):
         "user": event['user'],
         "entries": []
     }
-    print("Object to add to the DB is " + listObject);
+    print("Object to add to the DB is " + str(listObject));
     collection = client.list_entries
     result = collection.insert_one(listObject)
     resultId = result.inserted_id
