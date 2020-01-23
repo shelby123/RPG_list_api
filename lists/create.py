@@ -8,7 +8,7 @@ def create(event, context):
     if 'name' not in event or 'user' not in event: 
         response = {
             "statusCode": 400,
-            "body": json.dumps({'error': 'requires name and user'})
+            "body": json.dumps({'error': 'requires name and user', 'event': event})
         }
         return response
 
