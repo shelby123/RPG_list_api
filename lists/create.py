@@ -5,7 +5,8 @@ import time
 
 # TODO: refactor DB connection into separate file. 
 def create(event, context):
-    if 'name' not in event or 'user' not in event: 
+    let body = JSON.parse(event.body)
+    if 'name' not in body or 'user' not in body: 
         response = {
             "statusCode": 400,
             "body": json.dumps({'error': 'requires name and user', 'event': event})
@@ -21,8 +22,8 @@ def create(event, context):
     listObject = {
         "createdAt": int(time.time()),
         "lastModified": int(time.time()),
-        "name": event['name'],
-        "user": event['user'],
+        "name": body['name'],
+        "user": body['user'],
         "entries": []
     }
     print("Object to add to the DB is " + str(listObject))
