@@ -5,7 +5,11 @@ import time
 
 # TODO: refactor DB connection into separate file. 
 def create(event, context):
-    body = json.loads(event.body)
+    print("event is");
+    print(event)
+    body = json.loads(event['body'])
+    print("body is")
+    print(body)
     if 'name' not in body or 'user' not in body: 
         response = {
             "statusCode": 400,
