@@ -5,11 +5,7 @@ import time
 
 # TODO: refactor DB connection into separate file. 
 def create(event, context):
-    print("event is");
-    print(event)
     body = json.loads(event['body'])
-    print("body is")
-    print(body)
     if 'name' not in body or 'user' not in body: 
         response = {
             "statusCode": 400,
@@ -41,7 +37,10 @@ def create(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(body),
+        "headers": {
+            "Access-Control-Allow-Origin" : "*" # Required for CORS support to work
+        },
     }
 
     return response
