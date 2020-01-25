@@ -6,7 +6,7 @@ from lists.db import query_list
 
 def get(event, context):
     collection = get_db_collection()
-    doc = query_list(collection, event['listId'])
+    doc = query_list(collection, event.pathParameters['id'])
 
     body = {
         "message": "get list lambda invoked",

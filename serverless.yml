@@ -20,9 +20,13 @@ functions:
     handler: lists/get.get
     events:
       - http:
-          path: lists/get
+          path: lists/get/{id}
           method: get
           cors: true
+          request:
+            parameters:
+              paths:
+                id: true
   create: 
     handler: lists/create.create
     events: 
