@@ -9,8 +9,6 @@ def get(event, context):
     doc = query_list(collection, event['pathParameters']['id'])
 
     body = {
-        "message": "get list lambda invoked",
-        "input": event, 
         "list": json.dumps(doc, sort_keys=True, indent=4, default=json_util.default)
     }
 
