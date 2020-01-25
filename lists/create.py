@@ -1,9 +1,9 @@
 import json
-import os
-from pymongo import MongoClient
 import time
+from lists.db import get_db_collection
+from lists.db import insert_list
 
-# TODO: refactor DB connection into separate file. 
+
 def create(event, context):
     body = json.loads(event['body'])
     if 'name' not in body or 'user' not in body: 
@@ -13,12 +13,6 @@ def create(event, context):
         }
         return response
 
-    username = os.environ['DB_CREDENTIAL_USERNAME']
-    password = os.environ['DB_CREDENTIAL_PASSWORD']
-    url = "mongodb+srv://" + username + ":" + password + "@cluster0-gpeio.mongodb.net/test?retryWrites=true&w=majority";
-    client = MongoClient(url);
-    db = client.RPG;
-
     listObject = {
         "createdAt": int(time.time()),
         "lastModified": int(time.time()),
@@ -27,8 +21,8 @@ def create(event, context):
         "entries": []
     }
     print("Object to add to the DB is " + str(listObject))
-    collection = db.list_entries
-    result = collection.insert_one(listObject)
+    collection = get_db_collection()
+    result = insert_list(collection, listObject)
     resultId = result.inserted_id
     print("result id is " + str(resultId))
     body = {
@@ -45,11 +39,3 @@ def create(event, context):
 
     return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """

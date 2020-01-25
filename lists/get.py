@@ -1,11 +1,9 @@
 import json
-import os
-from pymongo import MongoClient
 from bson import json_util
-from bson.objectid import ObjectId
+from lists.db import get_db_collection
+from lists.db import query_list
 
 
-# TODO: refactor DB connection into separate file. 
 def get(event, context):
     collection = get_db_collection()
     doc = query_list(collection, event['list_id'])
@@ -22,16 +20,4 @@ def get(event, context):
     }
     return response
 
-
-def get_db_collection():
-    username = os.environ['DB_CREDENTIAL_USERNAME']
-    password = os.environ['DB_CREDENTIAL_PASSWORD']
-    url = "mongodb+srv://" + username + ":" + password + "@cluster0-gpeio.mongodb.net/test?retryWrites=true&w=majority"
-    client = MongoClient(url)
-    db = client.RPG
-    return db.list_entries
-
-
-def query_list(collection, list_id):
-    return collection.find_one({'_id': ObjectId(list_id)})
 
