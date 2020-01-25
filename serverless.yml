@@ -16,9 +16,6 @@ iamRoleStatements:
         - "dynamodb:*"
 
 functions:
-  CRUD:
-    handler: handler.main
-  
   get: 
     handler: lists/get.get
     events:
@@ -33,6 +30,13 @@ functions:
           path: lists/add
           method: post
           cors: true
+  update:
+    handler: lists/update.update
+    events:
+    - http:
+        path: lists/update
+        method: post
+        cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

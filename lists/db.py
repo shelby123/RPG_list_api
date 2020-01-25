@@ -18,3 +18,7 @@ def query_list(collection, list_id):
 
 def insert_list(collection, list_object):
     return collection.insert_one(list_object)
+
+
+def update_list(collection, list_id, updated_list):
+    return collection.replace_one({'_id': ObjectId(list_id)}, updated_list)
