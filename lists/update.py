@@ -6,8 +6,9 @@ from lists.db import query_list
 
 
 def update(event, context):
-    list_id = event['listId']
-    elements = event['entries']
+    body = json.loads(event['body'])
+    list_id = body['listId']
+    elements = body['entries']
     if list_id is None:
         response = {
             "statusCode": 400,
